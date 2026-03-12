@@ -25,24 +25,24 @@ class ImageGenInput(BaseModel):
 
     function: str = Field(
         ...,  # Required
-        description="图像编辑功能。支持 "
-        "stylization_all、stylization_local、description_edit"
-        "、description_edit_with_mask、remove_watermark、expand"
-        "、super_resolution、colorization、doodle"
-        "、control_cartoon_feature。",
+        description="Image editing function. Supported values: "
+        "stylization_all, stylization_local, description_edit"
+        ", description_edit_with_mask, remove_watermark, expand"
+        ", super_resolution, colorization, doodle"
+        ", control_cartoon_feature.",
     )
     base_image_url: str = Field(
         ...,  # Required
-        description="输入图像的URL地址，需为公网可访问地址，支持 HTTP 或 HTTPS "
-        "协议。格式：JPG、JPEG、PNG、BMP、TIFF、WEBP，分辨率[512,"
-        "4096]，大小不超过10MB。URL不能包含中文字符。",
+        description="Input image URL; must be a publicly accessible HTTP or HTTPS address. "
+        "Formats: JPG, JPEG, PNG, BMP, TIFF, WEBP; resolution [512, "
+        "4096]; max size 10 MB. URL must not contain Chinese characters.",
     )
     mask_image_url: Optional[str] = Field(
         default=None,
-        description="仅当function为description_edit_with_mask时必填，"
-        "其余情况无需填写。要求：URL，分辨率与base_image_url一致，"
-        "格式：JPG、JPEG、PNG、BMP、TIFF、WEBP，大小不超过10MB，"
-        "白色为编辑区域，黑色为不变区域。",
+        description="Required only when function is description_edit_with_mask; "
+        "not needed otherwise. Requirements: URL, resolution must match base_image_url, "
+        "formats: JPG, JPEG, PNG, BMP, TIFF, WEBP, max size 10 MB. "
+        "White areas indicate regions to edit, black areas remain unchanged.",
     )
     prompt: str = Field(
         ...,
@@ -82,7 +82,7 @@ class ImageEdit(Tool[ImageGenInput, ImageGenOutput]):
     """
 
     name: str = "modelstudio_image_edit"
-    description: str = "AI图像编辑（图生图）服务，输入原图URL、编辑功能、文本描述和分辨率，" "返回编辑后的图片URL。"
+    description: str = "AI image editing (image-to-image) service. Input: original image URL, editing function, text description, and resolution; " "returns the edited image URL."
 
     @trace(trace_type="AIGC", trace_name="image_edit")
     async def arun(self, args: ImageGenInput, **kwargs: Any) -> ImageGenOutput:

@@ -77,8 +77,8 @@ class ImageToVideoSubmitOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="视频生成的任务状态，PENDING：任务排队中，RUNNING：任务处理中，SUCCEEDED：任务执行成功，"
-        "FAILED：任务执行失败，CANCELED：任务取消成功，UNKNOWN：任务不存在或状态未知",
+        description="Video generation task status. PENDING: task queued, RUNNING: task processing, SUCCEEDED: task completed successfully, "
+        "FAILED: task failed, CANCELED: task canceled, UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(
@@ -101,8 +101,8 @@ class ImageToVideoSubmit(
 
     name: str = "modelstudio_image_to_video_submit_task"
     description: str = (
-        "通义万相-图生视频模型的异步任务提交工具。根据首帧图像和文本提示词，生成时长为5秒的无声视频。"
-        "同时支持特效模板，可添加“魔法悬浮”、“气球膨胀”等效果，适用于创意视频制作、娱乐特效展示等场景。"
+        “Wanxiang image-to-video async task submission tool. Generates 5-second silent videos from a first-frame image and text prompt. “
+        “Supports effect templates such as magic floating and balloon inflation, suitable for creative video production and entertainment effects.”
     )
 
     @trace(trace_type="AIGC", trace_name="image_to_video_submit")
@@ -245,8 +245,8 @@ class ImageToVideoFetchOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="视频生成的任务状态，PENDING：任务排队中，RUNNING：任务处理中，SUCCEEDED：任务执行成功，"
-        "FAILED：任务执行失败，CANCELED：任务取消成功，UNKNOWN：任务不存在或状态未知",
+        description="Video generation task status. PENDING: task queued, RUNNING: task processing, SUCCEEDED: task completed successfully, "
+        "FAILED: task failed, CANCELED: task canceled, UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(

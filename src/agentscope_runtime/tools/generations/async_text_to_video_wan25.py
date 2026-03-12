@@ -30,13 +30,13 @@ class TextToVideoWan25SubmitInput(BaseModel):
     )
     audio_url: Optional[str] = Field(
         default=None,
-        description="自定义音频文件URL，模型将使用该音频生成视频。"
-        "参数优先级：audio_url > audio，仅在 audio_url 为空时audio生效。",
+        description="Custom audio file URL; the model will use this audio to generate the video. "
+        "Priority: audio_url > audio; audio only takes effect when audio_url is empty.",
     )
     audio: Optional[bool] = Field(
         default=None,
-        description="是否自动生成音频。"
-        "参数优先级：audio_url > audio，仅在 audio_url 为空时audio生效。",
+        description="Whether to auto-generate audio. "
+        "Priority: audio_url > audio; audio only takes effect when audio_url is empty.",
     )
     size: Optional[str] = Field(
         default=None,
@@ -73,8 +73,8 @@ class TextToVideoWan25SubmitOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="视频生成的任务状态，PENDING：任务排队中，RUNNING：任务处理中，SUCCEEDED：任务执行成功，"
-        "FAILED：任务执行失败，CANCELED：任务取消成功，UNKNOWN：任务不存在或状态未知",
+        description="Video generation task status. PENDING: task queued, RUNNING: task processing, SUCCEEDED: task completed successfully, "
+        "FAILED: task failed, CANCELED: task canceled, UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(
@@ -94,8 +94,8 @@ class TextToVideoWan25Submit(
 
     name: str = "modelstudio_text_to_video_wan25_submit_task"
     description: str = (
-        "通义万相-文生视频模型的异步任务提交工具。可根据文本生成5秒或10秒有声视频，支持 480P、720P、1080P 多种分辨率档位，"
-        "支持自动配音，或传入自定义音频文件，实现音画同步。"
+        "Wanxiang text-to-video async task submission tool. Generates 5s or 10s videos with audio from text, supporting 480P, 720P, and 1080P resolutions. "
+        "Supports auto-generated audio or custom audio files for audio-video synchronization."
     )
 
     @trace(trace_type="AIGC", trace_name="text_to_video_wan25_submit")
@@ -232,8 +232,8 @@ class TextToVideoWan25FetchOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="视频生成的任务状态，PENDING：任务排队中，RUNNING：任务处理中，SUCCEEDED：任务执行成功，"
-        "FAILED：任务执行失败，CANCELED：任务取消成功，UNKNOWN：任务不存在或状态未知",
+        description="Video generation task status. PENDING: task queued, RUNNING: task processing, SUCCEEDED: task completed successfully, "
+        "FAILED: task failed, CANCELED: task canceled, UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(

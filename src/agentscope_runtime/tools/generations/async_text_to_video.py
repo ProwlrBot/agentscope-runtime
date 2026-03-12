@@ -63,8 +63,8 @@ class TextToVideoSubmitOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="视频生成的任务状态，PENDING：任务排队中，RUNNING：任务处理中，SUCCEEDED：任务执行成功，"
-        "FAILED：任务执行失败，CANCELED：任务取消成功，UNKNOWN：任务不存在或状态未知",
+        description="Video generation task status. PENDING: task queued, RUNNING: task processing, SUCCEEDED: task completed successfully, "
+        "FAILED: task failed, CANCELED: task canceled, UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(
@@ -84,8 +84,8 @@ class TextToVideoSubmit(
 
     name: str = "modelstudio_text_to_video_submit_task"
     description: str = (
-        "通义万相-文生视频模型的异步任务提交工具。可根据文本生成5秒无声视频，支持 480P、720P、1080P 多种分辨率档位，"
-        "并在各档位下提供多个具体尺寸选项，以适配不同业务场景。"
+        "Wanxiang text-to-video async task submission tool. Generates 5-second silent videos from text, supporting 480P, 720P, and 1080P resolutions "
+        "with multiple size options per tier to accommodate different use cases."
     )
 
     @trace(trace_type="AIGC", trace_name="text_to_video_submit")
@@ -218,8 +218,8 @@ class TextToVideoFetchOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="视频生成的任务状态，PENDING：任务排队中，RUNNING：任务处理中，SUCCEEDED：任务执行成功，"
-        "FAILED：任务执行失败，CANCELED：任务取消成功，UNKNOWN：任务不存在或状态未知",
+        description="Video generation task status. PENDING: task queued, RUNNING: task processing, SUCCEEDED: task completed successfully, "
+        "FAILED: task failed, CANCELED: task canceled, UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(

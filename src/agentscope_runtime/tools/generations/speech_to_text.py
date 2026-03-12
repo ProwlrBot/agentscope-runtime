@@ -31,9 +31,9 @@ class SpeechToTextInput(BaseModel):
     )
     language_hints: Optional[list[str]] = Field(
         default=None,
-        description="指定待识别语音的语言代码。该参数仅适用于paraformer-v2模型。"
-        "支持的语言代码：zh: 中文, en: 英文, ja: 日语, yue: 粤语, ko: 韩语,"
-        " de：德语, fr：法语, ru：俄语。默认为['zh', 'en']",
+        description="Language codes for speech recognition. Only applicable to the paraformer-v2 model. "
+        "Supported codes: zh: Chinese, en: English, ja: Japanese, yue: Cantonese, ko: Korean,"
+        " de: German, fr: French, ru: Russian. Default: ['zh', 'en']",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -66,8 +66,8 @@ class SpeechToText(Tool[SpeechToTextInput, SpeechToTextOutput]):
 
     name: str = "modelstudio_speech_to_text"
     description: str = (
-        "录音文件识别（也称为录音文件转写）是指对音视频文件进行语音识别，将语音转换为文本。"
-        "支持单个文件识别和批量文件识别，适用于处理不需要即时返回结果的场景。"
+        "Audio file recognition (also known as audio file transcription) performs speech recognition on audio/video files, converting speech to text. "
+        "Supports single-file and batch-file recognition, suitable for scenarios that do not require immediate results."
     )
 
     @trace(trace_type="AIGC", trace_name="speech_to_text")

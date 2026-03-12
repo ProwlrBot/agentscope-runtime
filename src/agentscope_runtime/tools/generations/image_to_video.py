@@ -86,8 +86,8 @@ class ImageToVideo(Tool[ImageToVideoInput, ImageToVideoOutput]):
 
     name: str = "modelstudio_image_to_video"
     description: str = (
-        "通义万相-图生视频模型根据首帧图像和文本提示词，生成时长为5秒的无声视频。"
-        "同时支持特效模板，可添加“魔法悬浮”、“气球膨胀”等效果，适用于创意视频制作、娱乐特效展示等场景。"
+        “Wanxiang image-to-video model generates 5-second silent videos from a first-frame image and text prompt. “
+        “Supports effect templates such as magic floating and balloon inflation, suitable for creative video production and entertainment effects.”
     )
 
     @trace(trace_type="AIGC", trace_name="image_to_video")

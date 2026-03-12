@@ -22,9 +22,9 @@ class QwenImageEditInput(BaseModel):
 
     image_url: str = Field(
         ...,
-        description="输入图像的URL地址，需为公网可访问地址，支持 HTTP 或 HTTPS "
-        "协议。格式：JPG、JPEG、PNG、BMP、TIFF、WEBP，分辨率[384,"
-        "3072]，大小不超过10MB。URL不能包含中文字符。",
+        description="Input image URL; must be a publicly accessible HTTP or HTTPS address. "
+        "Formats: JPG, JPEG, PNG, BMP, TIFF, WEBP; resolution [384, "
+        "3072]; max size 10 MB. URL must not contain Chinese characters.",
     )
     prompt: str = Field(
         ...,

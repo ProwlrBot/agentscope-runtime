@@ -31,14 +31,14 @@ class ImageStyleRepaintInput(BaseModel):
 
     style_index: int = Field(
         ...,
-        description="人像风格类型索引值，当前支持以下风格：-1：参考上传图像风格, "
-        "0：复古漫画, 1：3D童话, 2：二次元, 3：小清新, 4：未来科技, "
-        "5：国画古风, 6：将军百战, 7：炫彩卡通, 8：清雅国风, 9：喜迎新年。",
+        description="Portrait style type index. Supported styles: -1: reference uploaded image style, "
+        "0: retro comic, 1: 3D fairy tale, 2: anime, 3: fresh, 4: futuristic tech, "
+        "5: Chinese ink painting, 6: warrior general, 7: colorful cartoon, 8: elegant Chinese style, 9: New Year celebration.",
     )
 
     style_ref_url: Optional[str] = Field(
         default=None,
-        description="风格参考图像的URL地址。当参数style_index等于-1时，必须传入，" "其他风格无需传入。",
+        description="URL of the style reference image. Required when style_index is -1; " "not needed for other styles.",
     )
 
     watermark: Optional[bool] = Field(

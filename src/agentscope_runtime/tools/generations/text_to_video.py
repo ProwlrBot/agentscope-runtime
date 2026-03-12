@@ -78,8 +78,8 @@ class TextToVideo(Tool[TextToVideoInput, TextToVideoOutput]):
 
     name: str = "modelstudio_text_to_video"
     description: str = (
-        "通义万相-文生视频模型可根据文本生成5秒无声视频，支持 480P、720P、1080P 多种分辨率档位，"
-        "并在各档位下提供多个具体尺寸选项，以适配不同业务场景。"
+        "Wanxiang text-to-video model generates 5-second silent videos from text, supporting 480P, 720P, and 1080P resolutions "
+        "with multiple size options per tier to accommodate different use cases."
     )
 
     @trace(trace_type="AIGC", trace_name="text_to_video")

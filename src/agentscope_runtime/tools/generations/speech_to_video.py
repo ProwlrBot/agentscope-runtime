@@ -25,16 +25,16 @@ class SpeechToVideoInput(BaseModel):
 
     image_url: str = Field(
         ...,
-        description="上传的图片URL。图像格式：支持jpg，jpeg，png，bmp，webp。"
-        "图像分辨率：图像的宽度和高度范围为[400, 7000]像素。"
-        "上传图片仅支持公网可访问的HTTP/HTTPS链接。",
+        description="Uploaded image URL. Supported formats: jpg, jpeg, png, bmp, webp. "
+        "Image resolution: width and height range is [400, 7000] pixels. "
+        "Only publicly accessible HTTP/HTTPS links are supported.",
     )
     audio_url: str = Field(
         ...,
-        description="上传的音频文件URL。音频格式：格式为wav、mp3。"
-        "音频限制：文件<15M，时长＜20s。"
-        "音频内容：音频中需包含清晰、响亮的人声语音，并去除了环境噪音、"
-        "背景音乐等声音干扰信息。上传音频仅支持公网可访问的HTTP/HTTPS链接。",
+        description="Uploaded audio file URL. Supported formats: wav, mp3. "
+        "Audio limits: file size < 15 MB, duration < 20s. "
+        "Audio content: must contain clear, loud human speech with environmental noise "
+        "and background music removed. Only publicly accessible HTTP/HTTPS links are supported.",
     )
     resolution: Optional[str] = Field(
         default=None,
@@ -76,10 +76,10 @@ class SpeechToVideo(Tool[SpeechToVideoInput, SpeechToVideoOutput]):
 
     name: str = "modelstudio_speech_to_video"
     description: str = (
-        "数字人wan2.2-s2v模型能基于单张图片和音频，生成动作自然的说话、唱歌或表演视频。"
-        "通过输入的人声音频，驱动静态图片中的人物实现口型、表情和动作与音频同步。"
-        "支持说话、唱歌、表演三种对口型场景，支持真人及卡通人物，"
-        "提供480P、720P两档分辨率选项。"
+        "Digital human wan2.2-s2v model generates natural talking, singing, or performing videos from a single image and audio. "
+        "Uses input voice audio to drive lip-sync, facial expressions, and body movements of the character in a static image. "
+        "Supports three lip-sync scenarios: speaking, singing, and performing; supports both real and cartoon characters; "
+        "provides 480P and 720P resolution options."
     )
 
     @staticmethod

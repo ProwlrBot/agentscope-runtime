@@ -23,16 +23,16 @@ class SpeechToVideoSubmitInput(BaseModel):
 
     image_url: str = Field(
         ...,
-        description="上传的图片URL。图像格式：支持jpg，jpeg，png，bmp，webp。"
-        "图像分辨率：图像的宽度和高度范围为[400, 7000]像素。"
-        "上传图片仅支持公网可访问的HTTP/HTTPS链接。",
+        description="Uploaded image URL. Supported formats: jpg, jpeg, png, bmp, webp. "
+        "Image resolution: width and height range is [400, 7000] pixels. "
+        "Only publicly accessible HTTP/HTTPS links are supported.",
     )
     audio_url: str = Field(
         ...,
-        description="上传的音频文件URL。音频格式：格式为wav、mp3。"
-        "音频限制：文件<15M，时长＜20s。"
-        "音频内容：音频中需包含清晰、响亮的人声语音，并去除了环境噪音、"
-        "背景音乐等声音干扰信息。上传音频仅支持公网可访问的HTTP/HTTPS链接。",
+        description="Uploaded audio file URL. Supported formats: wav, mp3. "
+        "Audio limits: file size < 15 MB, duration < 20s. "
+        "Audio content: must contain clear, loud human speech with environmental noise "
+        "and background music removed. Only publicly accessible HTTP/HTTPS links are supported.",
     )
     resolution: Optional[str] = Field(
         default=None,
@@ -57,9 +57,9 @@ class SpeechToVideoSubmitOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="语音生成视频的任务状态，PENDING：任务排队中，RUNNING：任务处理中，"
-        "SUCCEEDED：任务执行成功，FAILED：任务执行失败，CANCELED：任务取消成功，"
-        "UNKNOWN：任务不存在或状态未知",
+        description="Speech-to-video task status. PENDING: task queued, RUNNING: task processing, "
+        "SUCCEEDED: task completed successfully, FAILED: task failed, CANCELED: task canceled, "
+        "UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(
@@ -79,9 +79,9 @@ class SpeechToVideoSubmit(
 
     name: str = "modelstudio_speech_to_video_submit_task"
     description: str = (
-        "数字人wan2.2-s2v模型的异步任务提交工具。能基于单张图片和音频，生成动作自然的说话、"
-        "唱歌或表演视频。通过输入的人声音频，驱动静态图片中的人物实现口型、表情和动作与音频同步。"
-        "支持说话、唱歌、表演三种对口型场景，支持真人及卡通人物，提供480P、720P两档分辨率选项。"
+        "Digital human wan2.2-s2v async task submission tool. Generates natural talking, singing, or performing "
+        "videos from a single image and audio. Uses input voice to drive lip-sync, expressions, and movements in sync. "
+        "Supports speaking, singing, and performing scenarios; supports real and cartoon characters; provides 480P and 720P resolutions."
     )
 
     @staticmethod
@@ -242,7 +242,7 @@ class SpeechToVideoFetchOutput(BaseModel):
     video_url: Optional[str] = Field(
         default=None,
         title="Video URL",
-        description="Generated video file URL，仅在任务成功完成时有值",
+        description="Generated video file URL; only populated when the task completes successfully",
     )
 
     task_id: str = Field(
@@ -252,9 +252,9 @@ class SpeechToVideoFetchOutput(BaseModel):
 
     task_status: str = Field(
         title="Task Status",
-        description="语音生成视频的任务状态，PENDING：任务排队中，RUNNING：任务处理中，"
-        "SUCCEEDED：任务执行成功，FAILED：任务执行失败，CANCELED：任务取消成功，"
-        "UNKNOWN：任务不存在或状态未知",
+        description="Speech-to-video task status. PENDING: task queued, RUNNING: task processing, "
+        "SUCCEEDED: task completed successfully, FAILED: task failed, CANCELED: task canceled, "
+        "UNKNOWN: task does not exist or status unknown",
     )
 
     request_id: Optional[str] = Field(
