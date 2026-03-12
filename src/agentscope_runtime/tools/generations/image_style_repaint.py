@@ -26,7 +26,7 @@ class ImageStyleRepaintInput(BaseModel):
 
     image_url: str = Field(
         ...,
-        description="输入图像的URL地址。",
+        description="URL of the input image.",
     )
 
     style_index: int = Field(
@@ -43,7 +43,7 @@ class ImageStyleRepaintInput(BaseModel):
 
     watermark: Optional[bool] = Field(
         default=None,
-        description="是否添加水印，默认不设置",
+        description="Whether to add a watermark; not set by default",
     )
 
     ctx: Optional[Context] = Field(
@@ -58,11 +58,11 @@ class ImageStyleRepaintOutput(BaseModel):
     Portrait Style Repaint Output
     """
 
-    results: list[str] = Field(title="Results", description="输出图片url 列表")
+    results: list[str] = Field(title="Results", description="List of output image URLs")
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -74,7 +74,7 @@ class ImageStyleRepaint(
     """
 
     name: str = "modelstudio_image_style_repaint"
-    description: str = "人像风格重绘服务，输入原始图像和风格数据(索引或参考图像），返回重绘后的图像。"
+    description: str = "Portrait style repaint service. Input the original image and style data (index or reference image); returns the repainted image."
 
     def __init__(self, name: str = None, description: str = None):
         super().__init__(name=name, description=description)

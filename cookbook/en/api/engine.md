@@ -241,7 +241,7 @@ The engine module contains the core components of AgentScope Runtime.
    :no-index:
 ```
 
-### Services · 核心
+### Services (Core)
 ```{eval-rst}
 .. automodule:: agentscope_runtime.engine.services.base
    :members:

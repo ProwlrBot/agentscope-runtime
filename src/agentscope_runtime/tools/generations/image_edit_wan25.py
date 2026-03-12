@@ -24,23 +24,23 @@ class ImageGenInput(BaseModel):
 
     images: list[str] = Field(
         ...,  # Required
-        description="输入图像URL数组。URL不能包含中文字符，需为公网可访问地址。",
+        description="Array of input image URLs. URLs must not contain Chinese characters and must be publicly accessible.",
     )
     prompt: str = Field(
         ...,
-        description="正向提示词，用来描述生成图像中期望包含的元素和视觉特点, 超过2000自动截断",
+        description="Positive prompt describing the desired elements and visual features in the generated image; automatically truncated beyond 2000 characters",
     )
     negative_prompt: Optional[str] = Field(
         default=None,
-        description="反向提示词，用来描述不希望在画面中看到的内容，可以对画面进行限制，超过500个字符自动截断",
+        description="Negative prompt describing unwanted content in the image to constrain generation; automatically truncated beyond 500 characters",
     )
     n: Optional[int] = Field(
         default=1,
-        description="生成图片的数量。取值范围为1~4张 默认1",
+        description="Number of images to generate. Range: 1-4, default 1",
     )
     watermark: Optional[bool] = Field(
         default=None,
-        description="是否添加水印，默认不设置",
+        description="Whether to add a watermark; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -54,11 +54,11 @@ class ImageGenOutput(BaseModel):
     Text-to-Image Output.
     """
 
-    results: list[str] = Field(title="Results", description="输出图片url 列表")
+    results: list[str] = Field(title="Results", description="List of output image URLs")
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -68,7 +68,7 @@ class ImageEditWan25(Tool[ImageGenInput, ImageGenOutput]):
     """
 
     name: str = "modelstudio_image_edit_wan25"
-    description: str = "AI图像编辑（图生图）服务，输入原图URL、编辑功能、文本描述和分辨率，返回编辑后的图片URL。"
+    description: str = "AI image editing (image-to-image) service. Input original image URL, editing function, text description, and resolution; returns edited image URLs."
 
     @trace(trace_type="AIGC", trace_name="image_edit_wan25")
     async def arun(self, args: ImageGenInput, **kwargs: Any) -> ImageGenOutput:

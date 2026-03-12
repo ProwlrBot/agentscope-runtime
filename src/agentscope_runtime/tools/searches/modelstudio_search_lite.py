@@ -71,7 +71,7 @@ class SearchLiteOutput(BaseModel):
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -80,7 +80,7 @@ class ModelstudioSearchLite(Tool[SearchLiteInput, SearchLiteOutput]):
     Search tool that calling dashscope for llm search result.
     """
 
-    description = "搜索可用于查询百科知识、时事新闻、天气等信息"
+    description = "Search tool for querying encyclopedia knowledge, current news, weather, and other information"
     name = "modelstudio_web_search"
 
     @trace(trace_type="SEARCH", trace_name="modelstudio_search_lite")
@@ -229,7 +229,7 @@ class ModelstudioSearchLite(Tool[SearchLiteInput, SearchLiteOutput]):
         results_list = []
         results = {}
         try:
-            # 使用异步HTTP客户端替代同步requests
+            # Use async HTTP client instead of synchronous requests
             timeout_config = aiohttp.ClientTimeout(total=timeout)
             async with aiohttp.ClientSession(
                 timeout=timeout_config,

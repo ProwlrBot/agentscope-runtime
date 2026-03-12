@@ -28,7 +28,7 @@ class ModelstudioRagLite(Tool[RagInput, RagOutput]):
     Dashscope Rag Tool that recalling user info on modelstudio
     """
 
-    description: str = "Modelstudio Rag可召回用户在百炼上的数据库中存储的信息，用于后续大模型生成使用。"
+    description: str = "Modelstudio RAG can retrieve information stored in the user's database on Modelstudio for subsequent large model generation."
     name: str = "modelstudio_RAG_lite"
 
     @trace(trace_type="RAG", trace_name="modelstudio_rag_lite")

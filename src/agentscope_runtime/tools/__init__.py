@@ -65,21 +65,21 @@ from .generations.image_generation_wan25 import (
 class McpServerMeta(BaseModel):
     instructions: str = Field(
         ...,
-        description="服务描述",
+        description="Service description",
     )
     components: List[Type[Tool]] = Field(
         ...,
-        description="组件列表",
+        description="Component list",
     )
 
 
 mcp_server_metas: Dict[str, McpServerMeta] = {
     "modelstudio_wan_image": McpServerMeta(
-        instructions="基于通义万相大模型的智能图像生成服务，提供高质量的图像处理和编辑功能",
+        instructions="Intelligent image generation service based on Wanxiang, providing high-quality image processing and editing",
         components=[ImageGeneration, ImageEdit, ImageStyleRepaint],
     ),
     "modelstudio_wan_video": McpServerMeta(
-        instructions="基于通义万相大模型提供AI视频生成服务，支持文本到视频、图像到视频和语音到视频的多模态生成功能",
+        instructions="AI video generation service based on Wanxiang, supporting text-to-video, image-to-video, and speech-to-video multimodal generation",
         components=[
             TextToVideoSubmit,
             TextToVideoFetch,
@@ -90,7 +90,7 @@ mcp_server_metas: Dict[str, McpServerMeta] = {
         ],
     ),
     "modelstudio_wan25_media": McpServerMeta(
-        instructions="基于通义万相大模型2.5版本提供的图像和视频生成服务",
+        instructions="Image and video generation service based on Wanxiang 2.5",
         components=[
             ImageGenerationWan25,
             ImageEditWan25,
@@ -101,19 +101,19 @@ mcp_server_metas: Dict[str, McpServerMeta] = {
         ],
     ),
     "modelstudio_qwen_image": McpServerMeta(
-        instructions="基于通义千问大模型的智能图像生成服务，提供高质量的图像处理和编辑功能",
+        instructions="Intelligent image generation service based on Qwen, providing high-quality image processing and editing",
         components=[QwenImageGen, QwenImageEdit],
     ),
     "modelstudio_web_search": McpServerMeta(
-        instructions="提供实时互联网搜索服务，提供准确及时的信息检索功能",
+        instructions="Real-time internet search service providing accurate and timely information retrieval",
         components=[ModelstudioSearchLite],
     ),
     "modelstudio_speech_to_text": McpServerMeta(
-        instructions="录音文件的语音识别服务，支持多种音频格式的语音转文字功能",
+        instructions="Speech recognition service for audio files, supporting speech-to-text for multiple audio formats",
         components=[SpeechToText],
     ),
     "modelstudio_qwen_text_to_speech": McpServerMeta(
-        instructions="基于通义千问大模型的语音合成服务，支持多种语言语音合成功能",
+        instructions="Text-to-speech synthesis service based on Qwen, supporting multilingual speech synthesis",
         components=[QwenTextToSpeech],
     ),
 }

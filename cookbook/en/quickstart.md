@@ -223,7 +223,7 @@ client = OpenAI(base_url="http://0.0.0.0:8091/compatible-mode/v1")
 
 response = client.responses.create(
   model="any_name",
-  input="杭州天气如何？"
+  input="How is the weather in Hangzhou?"
 )
 
 print(response)

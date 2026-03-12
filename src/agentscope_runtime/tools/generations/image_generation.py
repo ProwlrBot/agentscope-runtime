@@ -25,27 +25,27 @@ class ImageGenInput(BaseModel):
 
     prompt: str = Field(
         ...,
-        description="正向提示词，用来描述生成图像中期望包含的元素和视觉特点,超过800自动截断",
+        description="Positive prompt describing the desired elements and visual features in the generated image; automatically truncated beyond 800 characters",
     )
     size: Optional[str] = Field(
         default=None,
-        description="输出图像的分辨率。默认值是1024*1024 最高可达200万像素",
+        description="Output image resolution. Default is 1024*1024, up to 2 megapixels",
     )
     negative_prompt: Optional[str] = Field(
         default=None,
-        description="反向提示词，用来描述不希望在画面中看到的内容，可以对画面进行限制，超过500个字符自动截断",
+        description="Negative prompt describing unwanted content in the image to constrain generation; automatically truncated beyond 500 characters",
     )
     prompt_extend: Optional[bool] = Field(
         default=None,
-        description="是否开启prompt智能改写，开启后使用大模型对输入prompt进行智能改写",
+        description="Whether to enable smart prompt rewriting; when enabled, a large model rewrites the input prompt",
     )
     n: Optional[int] = Field(
         default=1,
-        description="生成图片的数量。取值范围为1~4张 默认1",
+        description="Number of images to generate. Range: 1-4, default 1",
     )
     watermark: Optional[bool] = Field(
         default=None,
-        description="是否添加水印，默认不设置",
+        description="Whether to add a watermark; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -59,11 +59,11 @@ class ImageGenOutput(BaseModel):
     Text-to-Image Output.
     """
 
-    results: list[str] = Field(title="Results", description="输出图片url 列表")
+    results: list[str] = Field(title="Results", description="List of output image URLs")
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -73,7 +73,7 @@ class ImageGeneration(Tool[ImageGenInput, ImageGenOutput]):
     """
 
     name: str = "modelstudio_image_gen"
-    description: str = "AI绘画（图像生成）服务，输入文本描述和图像分辨率，返回根据文本信息绘制的图片URL。"
+    description: str = "AI image generation service. Input text description and image resolution, returns image URLs generated from the text."
 
     @trace(trace_type="AIGC", trace_name="image_generation")
     async def arun(self, args: ImageGenInput, **kwargs: Any) -> ImageGenOutput:

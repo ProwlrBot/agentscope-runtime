@@ -28,15 +28,15 @@ class QwenImageEditInput(BaseModel):
     )
     prompt: str = Field(
         ...,
-        description="正向提示词，用来描述生成图像中期望包含的元素和视觉特点, 超过800个字符自动截断",
+        description="Positive prompt describing the desired elements and visual features in the generated image; automatically truncated beyond 800 characters",
     )
     negative_prompt: Optional[str] = Field(
         default=None,
-        description="反向提示词，用来描述不希望在画面中看到的内容，可以对画面进行限制，超过500个字符自动截断",
+        description="Negative prompt describing unwanted content in the image to constrain generation; automatically truncated beyond 500 characters",
     )
     watermark: Optional[bool] = Field(
         default=None,
-        description="是否添加水印，默认不设置",
+        description="Whether to add a watermark; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -52,12 +52,12 @@ class QwenImageEditOutput(BaseModel):
 
     results: list[str] = Field(
         title="Results",
-        description="输出的图片url列表",
+        description="List of output image URLs",
     )
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -68,7 +68,7 @@ class QwenImageEdit(Tool[QwenImageEditInput, QwenImageEditOutput]):
 
     name: str = "modelstudio_qwen_image_edit"
     description: str = (
-        "通义千问-图像编辑模型支持精准的中英双语文字编辑、调色、细节增强、风格迁移、增删物体、改变位置和动作等操作，可实现复杂的图文编辑。"
+        "Qwen image editing model supporting precise bilingual text editing, color adjustment, detail enhancement, style transfer, object addition/removal, and position/action changes for complex image-text editing."
     )
 
     @trace(trace_type="AIGC", trace_name="qwen_image_edit")

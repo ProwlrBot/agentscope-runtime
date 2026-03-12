@@ -105,7 +105,7 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
     """
 
     description = (
-        "中文搜索可用于查询百科知识、时事新闻、天气。但它不适用于解决编程问题。它仅收录中文信息，不收录英文资料。"  # noqa E501
+        "Search tool for querying encyclopedia knowledge, current news, and weather. Not suitable for programming problems. Primarily indexes Chinese information."  # noqa E501
     )
 
     name = "modelstudio_search_pro"
@@ -532,16 +532,16 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
             return text_result_str
 
         timestamp_templates = [
-            "（搜索结果收录于{}年{}月{}日）",
-            "（{}年{}月{}日）",
-            "（来自{}年{}月{}日的资料）",
-            "（{}年{}月{}日的资料）",
-            "（该信息的时间戳是{}年{}月{}日）",
-            "（资料日期为{}年{}月{}日）",
-            "（消息于{}年{}月{}日发布）",
-            "（发布时间是{}年{}月{}日）",
-            "（撰于{}年{}月{}日）",
-            "（截至{}年{}月{}日）",
+            "(Search results collected on {}/{}/{})",
+            "({}/{}/{})",
+            "(Data from {}/{}/{})",
+            "(Data from {}/{}/{})",
+            "(Timestamp: {}/{}/{})",
+            "(Data date: {}/{}/{})",
+            "(Published on {}/{}/{})",
+            "(Published: {}/{}/{})",
+            "(Written on {}/{}/{})",
+            "(As of {}/{}/{})",
         ]
         random.shuffle(timestamp_templates)
 
@@ -623,7 +623,7 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
                 # 2. After normally citing web pages, add "## Other Internet
                 #   Information:" and put the content removed by the
                 #   green-net filter here.
-                text_result_str += "## 其他互联网信息：\n\n```"
+                text_result_str += "## Other Internet Information:\n\n```"
                 for i, text in enumerate(other_text_result):
                     text = text + "\n\n"
                     text_result_str += text
@@ -643,8 +643,8 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
         if search_strategy == "pro_ultra":
             text_result_str = (
                 text_result_str.strip()
-                + f"# # 参考大纲\n\n{query}\n# 输出要求\n\n请做出有深度的回答，"
-                f"不少于1000字，回答时引用上述内容中的细节。"
+                + f"# # Reference Outline\n\n{query}\n# Output Requirements\n\nPlease provide an in-depth answer"
+                f" of no less than 1000 words, citing details from the above content."
             )
 
         return text_result_str
@@ -676,25 +676,25 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
 
         def tool_call_knowledge(_tool_output: List, **kwargs: Any) -> str:
             prompt = (
-                """以下通过权威渠道的实时信息可能有助于你回答问题，请优先参考：#以下根据实际返回选择"""  # noqa E501
+                """The following real-time information from authoritative sources may help you answer the question; please prioritize:"""  # noqa E501
             )
             for item in _tool_output:
                 if "result" not in item:
                     continue
                 if item.get("tool", "") == "oil_price":
-                    prompt = prompt + "\n 油价信息:" + item.get("result", "")
+                    prompt = prompt + "\n Oil price info:" + item.get("result", "")
                 elif item.get("tool", "") == "gold_price":
-                    prompt = prompt + "\n 金价信息:" + item.get("result", "")
+                    prompt = prompt + "\n Gold price info:" + item.get("result", "")
                 elif item.get("tool", "") == "exchange":
-                    prompt = prompt + "\n 汇率信息:" + item.get("result", "")
+                    prompt = prompt + "\n Exchange rate info:" + item.get("result", "")
                 elif item.get("tool", "") == "stock":
-                    prompt = prompt + "\n 股市信息:" + item.get("result", "")
+                    prompt = prompt + "\n Stock market info:" + item.get("result", "")
                 elif item.get("tool", "") == "silver_price":
-                    prompt = prompt + "\n 银价信息:" + item.get("result", "")
+                    prompt = prompt + "\n Silver price info:" + item.get("result", "")
                 elif item.get("tool", "") == "weather":
-                    prompt = prompt + "\n 天气信息:" + item.get("result", "")
+                    prompt = prompt + "\n Weather info:" + item.get("result", "")
                 elif item.get("tool", "") == "calendar":
-                    prompt = prompt + "\n 万年历信息:" + item.get("result", "")
+                    prompt = prompt + "\n Calendar info:" + item.get("result", "")
             return prompt
 
         def get_current_date_str() -> str:
@@ -703,11 +703,11 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
             )
             cur_time = beijing_time.timetuple()
             date_str = (
-                f"当前时间：{cur_time.tm_year}年{cur_time.tm_mon}月"
-                f"{cur_time.tm_mday}日，星期"
+                f"Current time: {cur_time.tm_year}/{cur_time.tm_mon}/"
+                f"{cur_time.tm_mday}, "
             )
-            date_str += ["一", "二", "三", "四", "五", "六", "日"][cur_time.tm_wday]
-            date_str += f"{cur_time.tm_hour}时{cur_time.tm_min}分"
+            date_str += ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][cur_time.tm_wday]
+            date_str += f" {cur_time.tm_hour}:{cur_time.tm_min}"
             date_str += "。"
             return date_str
 
@@ -724,7 +724,7 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
 
                         if search_strategy == "pro_ultra":
                             result += (
-                                f'# # 参考大纲\n\n{kwargs.get("query", "")}\n# 输出要求\n\n请做出有深度的回答，不少于1000字，回答时引用上述内容中的细节，并在引用处使用如`'  # noqa E501
+                                f'# # Reference Outline\n\n{kwargs.get("query", "")}\n# Output Requirements\n\nPlease provide an in-depth answer of no less than 1000 words, citing details from the above content, using format such as `'  # noqa E501
                                 + re.sub(
                                     "<number>",
                                     "1",
@@ -735,13 +735,13 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
                                     "2",
                                     citation_format,
                                 )  # noqa E501
-                                + "`, 的格式标记来源，每一处引用最多引用1个来源。"
+                                + "` to mark sources; each citation should reference at most 1 source."
                             )
                         else:
                             result += (
-                                "输出要求\n\n请在回答时引用上述内容，并在引用处使用 `"
+                                "Output Requirements\n\nPlease cite the above content in your answer and use `"
                                 + citation_format
-                                + "` 的格式标记来源，如果有多个来源，则用多个[]来表示，如`"  # noqa E501
+                                + "` format to mark sources. For multiple sources, use multiple [], e.g. `"  # noqa E501
                                 + re.sub(
                                     "<number>",
                                     "1",
@@ -752,13 +752,13 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
                                     "2",
                                     citation_format,
                                 )  # noqa E501
-                                + "`，如果回答没有引用上述内容则不用输出角标，禁止输出`"
+                                + "`. If the answer does not cite the above, do not output superscripts. Never output `"
                                 + re.sub(
                                     "<number>",
-                                    "无",
+                                    "none",
                                     citation_format,
                                 )  # noqa E501
-                                + "`或者`"
+                                + "` or `"
                                 + re.sub(
                                     "<number>",
                                     "not_found",
@@ -767,19 +767,19 @@ class ModelstudioSearch(Tool[SearchInput, SearchOutput]):
                                 + "`"
                             )
                     knowledge.append(
-                        KnowledgeHolder(source="你的知识库", content=result),
+                        KnowledgeHolder(source="your knowledge base", content=result),
                     )
             elif tool_name == "extra_tool_info":
                 result = tool_call_knowledge(result, **kwargs)
                 if result:
                     knowledge.append(
                         KnowledgeHolder(
-                            source="系统",
+                            source="system",
                             content=get_current_date_str(),
                         ),
                     )
                     knowledge.append(
-                        KnowledgeHolder(source="你的知识库", content=result),
+                        KnowledgeHolder(source="your knowledge base", content=result),
                     )
         return knowledge
 

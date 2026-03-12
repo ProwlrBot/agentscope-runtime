@@ -619,32 +619,32 @@ def _get_start_payload(args: Any, kwargs: Any, func: Any = None) -> Dict:
     """
     merged = {}
 
-    # 处理位置参数：尝试将位置参数与函数签名中的参数名对应
+    # Process positional args: map them to parameter names from the function signature
     if func is not None and isinstance(args, tuple) and len(args) > 0:
         try:
             sig = inspect.signature(func)
             params = list(sig.parameters.values())
 
-            # 跳过self参数（如果是实例方法）
+            # Skip self parameter (if instance method)
             start_idx = 0
             if params and params[0].name == "self":
                 start_idx = 1
 
-            # 将位置参数与参数名对应
+            # Map positional arguments to parameter names
             for i, arg in enumerate(args[start_idx:], start=start_idx):
                 if i < len(params):
                     param = params[i]
-                    # 只处理位置参数和位置或关键字参数，跳过*args和**kwargs
+                    # Only handle positional and positional-or-keyword params, skip *args and **kwargs
                     if param.kind in (
                         inspect.Parameter.POSITIONAL_ONLY,
                         inspect.Parameter.POSITIONAL_OR_KEYWORD,
                     ):
                         merged[param.name] = _obj_to_dict(arg)
         except (ValueError, TypeError, IndexError):
-            # 如果无法获取函数签名，回退到原来的逻辑
+            # If unable to get function signature, fall back to original logic
             pass
 
-    # 如果没有函数信息或无法解析，使用原来的逻辑
+    # If no function info or unable to parse, use original logic
     if not merged and isinstance(args, tuple) and len(args) > 0:
         dict_args = _obj_to_dict(args)
         if isinstance(dict_args, list):
@@ -654,7 +654,7 @@ def _get_start_payload(args: Any, kwargs: Any, func: Any = None) -> Dict:
         elif isinstance(dict_args, dict):
             merged.update(dict_args)
 
-    # 处理关键字参数
+    # Process keyword arguments
     dict_kwargs = _obj_to_dict(kwargs)
     dict_kwargs = {
         key: value

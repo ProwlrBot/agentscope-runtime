@@ -21,11 +21,11 @@ class QwenTextToSpeechInput(BaseModel):
 
     text: str = Field(
         ...,
-        description="要合成的文本，支持中文、英文、中英混合输入。最长输入为512 Token",
+        description="Text to synthesize; supports Chinese, English, and mixed Chinese-English input. Maximum input is 512 tokens",
     )
     voice: Optional[str] = Field(
         default=None,
-        description="使用的音色，可选值Cherry,Serena,Ethan,Chelsie等",
+        description="Voice to use; options include Cherry, Serena, Ethan, Chelsie, etc.",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -41,12 +41,12 @@ class QwenTextToSpeechOutput(BaseModel):
 
     result: str = Field(
         title="Results",
-        description="输出的音频url",
+        description="Output audio URL",
     )
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -58,7 +58,7 @@ class QwenTextToSpeech(
     """
 
     name: str = "modelstudio_qwen_tts"
-    description: str = "Qwen-TTS 是通义千问系列的语音合成模型，支持输入中文、英文、中英混合的文本，并流式输出音频。"
+    description: str = "Qwen-TTS is a speech synthesis model from the Qwen series, supporting Chinese, English, and mixed Chinese-English text input with streaming audio output."
 
     @trace(trace_type="AIGC", trace_name="qwen_tts")
     async def arun(

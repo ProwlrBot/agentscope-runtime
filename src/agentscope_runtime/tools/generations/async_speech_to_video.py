@@ -36,7 +36,7 @@ class SpeechToVideoSubmitInput(BaseModel):
     )
     resolution: Optional[str] = Field(
         default=None,
-        description="视频分辨率，默认不设置",
+        description="Video resolution; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -52,7 +52,7 @@ class SpeechToVideoSubmitOutput(BaseModel):
 
     task_id: str = Field(
         title="Task ID",
-        description="语音生成视频的任务ID",
+        description="Speech-to-video generation task ID",
     )
 
     task_status: str = Field(
@@ -65,7 +65,7 @@ class SpeechToVideoSubmitOutput(BaseModel):
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -225,7 +225,7 @@ class SpeechToVideoFetchInput(BaseModel):
 
     task_id: str = Field(
         title="Task ID",
-        description="语音生成视频的任务ID",
+        description="Speech-to-video generation task ID",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -242,12 +242,12 @@ class SpeechToVideoFetchOutput(BaseModel):
     video_url: Optional[str] = Field(
         default=None,
         title="Video URL",
-        description="生成的视频文件URL，仅在任务成功完成时有值",
+        description="Generated video file URL，仅在任务成功完成时有值",
     )
 
     task_id: str = Field(
         title="Task ID",
-        description="语音生成视频的任务ID",
+        description="Speech-to-video generation task ID",
     )
 
     task_status: str = Field(
@@ -260,13 +260,13 @@ class SpeechToVideoFetchOutput(BaseModel):
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
     video_duration: Optional[float] = Field(
         default=None,
         title="Video Duration",
-        description="视频时长（秒），用于计费",
+        description="Video duration (seconds), used for billing",
     )
 
 
@@ -279,7 +279,7 @@ class SpeechToVideoFetch(
     """
 
     name: str = "modelstudio_speech_to_video_fetch_result"
-    description: str = "数字人wan2.2-s2v模型的异步任务结果查询工具，根据Task ID查询任务结果。"
+    description: str = "Digital human wan2.2-s2v async task result query tool; retrieves task results by Task ID."
 
     @staticmethod
     async def _fetch(

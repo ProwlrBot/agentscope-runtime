@@ -176,7 +176,7 @@ You can extend the example in the following ways:
 1. **Change the model** — Replace the `model_id` in `OpenAIChatClient` with another model, or use a client from another model provider.
 2. **Add system prompts** — Modify the `instructions` field to create a different persona for the agent.
 
-## 📚 相关文档
+## Related Documentation
 
 * [Microsoft Agent Framework Documentation](https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview)
 

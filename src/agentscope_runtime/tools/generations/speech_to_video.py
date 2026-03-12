@@ -38,7 +38,7 @@ class SpeechToVideoInput(BaseModel):
     )
     resolution: Optional[str] = Field(
         default=None,
-        description="视频分辨率，默认不设置",
+        description="Video resolution; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -54,17 +54,17 @@ class SpeechToVideoOutput(BaseModel):
 
     video_url: str = Field(
         title="Video URL",
-        description="生成的视频文件URL",
+        description="Generated video file URL",
     )
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
     video_duration: Optional[float] = Field(
         default=None,
         title="Video Duration",
-        description="视频时长（秒），用于计费",
+        description="Video duration (seconds), used for billing",
     )
 
 

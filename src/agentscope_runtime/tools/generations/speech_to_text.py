@@ -27,7 +27,7 @@ class SpeechToTextInput(BaseModel):
 
     file_urls: list[str] = Field(
         ...,
-        description="音频文件的URL列表，支持公网可访问的HTTPS/HTTP链接",
+        description="List of audio file URLs; supports publicly accessible HTTPS/HTTP links",
     )
     language_hints: Optional[list[str]] = Field(
         default=None,
@@ -49,12 +49,12 @@ class SpeechToTextOutput(BaseModel):
 
     results: list[str] = Field(
         default_factory=list,
-        description="识别出的文本内容列表，每个元素对应一个音频文件的识别结果",
+        description="List of recognized text content; each element corresponds to a recognition result from an audio file",
     )
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 

@@ -25,27 +25,27 @@ class TextToVideoInput(BaseModel):
 
     prompt: str = Field(
         ...,
-        description="正向提示词，用来描述生成视频中期望包含的元素和视觉特点, 超过800个字符自动截断",
+        description="Positive prompt describing the desired elements and visual features in the generated video; automatically truncated beyond 800 characters",
     )
     negative_prompt: Optional[str] = Field(
         default=None,
-        description="反向提示词，用来描述不希望在视频画面中看到的内容，可以对视频画面进行限制，超过500个字符自动截断",
+        description="Negative prompt describing unwanted content in the video to constrain generation; automatically truncated beyond 500 characters",
     )
     size: Optional[str] = Field(
         default=None,
-        description="视频分辨率，默认不设置",
+        description="Video resolution; not set by default",
     )
     duration: Optional[int] = Field(
         default=None,
-        description="视频生成时长，单位为秒",
+        description="Video generation duration in seconds",
     )
     prompt_extend: Optional[bool] = Field(
         default=None,
-        description="是否开启prompt智能改写，开启后使用大模型对输入prompt进行智能改写",
+        description="Whether to enable smart prompt rewriting; when enabled, a large model rewrites the input prompt",
     )
     watermark: Optional[bool] = Field(
         default=None,
-        description="是否添加水印，默认不设置",
+        description="Whether to add a watermark; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -61,12 +61,12 @@ class TextToVideoOutput(BaseModel):
 
     video_url: str = Field(
         title="Video URL",
-        description="输出的视频url",
+        description="Output video URL",
     )
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 

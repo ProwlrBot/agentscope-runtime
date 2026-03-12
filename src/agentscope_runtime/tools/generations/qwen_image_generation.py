@@ -22,27 +22,27 @@ class QwenImageGenInput(BaseModel):
 
     prompt: str = Field(
         ...,
-        description="正向提示词，用来描述生成图像中期望包含的元素和视觉特点, 超过800个字符自动截断",
+        description="Positive prompt describing the desired elements and visual features in the generated image; automatically truncated beyond 800 characters",
     )
     negative_prompt: Optional[str] = Field(
         default=None,
-        description="反向提示词，用来描述不希望在画面中看到的内容，可以对画面进行限制，超过500个字符自动截断",
+        description="Negative prompt describing unwanted content in the image to constrain generation; automatically truncated beyond 500 characters",
     )
     size: str = Field(
         default=None,
-        description="输出图像的分辨率，格式为宽*高。默认分辨率为1328*1328",
+        description="Output image resolution in width*height format. Default is 1328*1328",
     )
     n: int = Field(
         default=None,
-        description="生成图片的数量。默认值为1。",
+        description="Number of images to generate. Default is 1.",
     )
     prompt_extend: Optional[bool] = Field(
         default=None,
-        description="是否开启prompt智能改写，开启后使用大模型对输入prompt进行智能改写",
+        description="Whether to enable smart prompt rewriting; when enabled, a large model rewrites the input prompt",
     )
     watermark: Optional[bool] = Field(
         default=None,
-        description="是否添加水印，默认不设置",
+        description="Whether to add a watermark; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -58,12 +58,12 @@ class QwenImageGenOutput(BaseModel):
 
     results: list[str] = Field(
         title="Results",
-        description="输出的图片url列表",
+        description="List of output image URLs",
     )
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
@@ -73,7 +73,7 @@ class QwenImageGen(Tool[QwenImageGenInput, QwenImageGenOutput]):
     """
 
     name: str = "modelstudio_qwen_image_gen"
-    description: str = "通义千问-文生图模型是一款通用图像生成模型，支持多种艺术风格，尤其擅长复杂文本渲染，特别是中英文文本渲染。"
+    description: str = "Qwen text-to-image model is a general-purpose image generation model supporting multiple artistic styles, especially excelling at complex text rendering in both Chinese and English."
 
     @trace(trace_type=TraceType.AIGC, trace_name="qwen_image_gen")
     async def arun(

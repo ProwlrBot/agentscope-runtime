@@ -62,7 +62,7 @@ class SubscribeStatusCheckInput(BaseModel):
 
     uuid: str = Field(
         ...,
-        description="账户ID",
+        description="Account ID",
     )
 
 
@@ -71,11 +71,11 @@ class SubscribeStatusOutput(BaseModel):
 
     subscribe_flag: bool = Field(
         ...,
-        description="是否订阅,已订阅为true,否则为false",
+        description="Whether subscribed; true if subscribed, false otherwise",
     )
     subscribe_package: Optional[str] = Field(
         None,
-        description="订阅剩余套餐描述",
+        description="Remaining subscription package description",
     )
 
 
@@ -84,7 +84,7 @@ class SubscribePackageInitializeInput(BaseModel):
 
     uuid: str = Field(
         ...,
-        description="账户ID",
+        description="Account ID",
     )
 
 
@@ -93,7 +93,7 @@ class SubscribePackageInitializeOutput(BaseModel):
 
     subscribe_url: Optional[str] = Field(
         None,
-        description="订阅链接",
+        description="Subscription link",
     )
 
 
@@ -102,11 +102,11 @@ class SubscribeTimesSaveInput(BaseModel):
 
     uuid: str = Field(
         ...,
-        description="账户ID",
+        description="Account ID",
     )
     out_request_no: str = Field(
         ...,
-        description="外部订单号，用来计次幂等,防止重复扣减订阅次数",
+        description="External order number for idempotent counting to prevent duplicate subscription deductions",
     )
 
 
@@ -115,7 +115,7 @@ class SubscribeTimesSaveOutput(BaseModel):
 
     success: bool = Field(
         ...,
-        description="计次服务调用是否成功",
+        description="Whether the usage count service call was successful",
     )
 
 
@@ -124,7 +124,7 @@ class SubscribeCheckOrInitializeInput(BaseModel):
 
     uuid: str = Field(
         ...,
-        description="账户ID",
+        description="Account ID",
     )
 
 
@@ -133,7 +133,7 @@ class SubscribeCheckOrInitializeOutput(BaseModel):
 
     subscribe_flag: bool = Field(
         ...,
-        description="是否订阅,已订阅为true,否则为false",
+        description="Whether subscribed; true if subscribed, false otherwise",
     )
     subscribe_url: Optional[str] = Field(
         None,
@@ -161,27 +161,10 @@ class AlipaySubscribeStatusCheck(
     Usage scenarios:
     - AI Agent subscription payment scenario
 
-    ---
-    支付宝订阅状态检查组件
-
-    功能：
-    - 判断用户是否为有效会员
-    - 返回有效会员的版本信息
-    - 包括有效期、剩余次数等
-
-    主要特点：
-    - 智能体订阅状态查询
-
-    输入参数类型: SubscribeStatusCheckInput
-    输出参数类型: SubscribeStatusOutput
-
-    使用场景：
-    智能体订阅付费场景
-
     """
 
     name: str = "query-alipay-subscription-status"
-    description: str = "查询用户订阅状态及套餐详情"
+    description: str = "Query user subscription status and package details"
 
     async def _arun(
         self,
@@ -226,13 +209,13 @@ class AlipaySubscribeStatusCheck(
                         total_times = info.subscribe_times
                         left_times = info.left_times
                         subscribe_package_desc = (
-                            f"订阅{total_times}次，还剩{left_times}次"
+                            f"Subscribed {total_times} times, {left_times} remaining"
                         )
                     elif package_type == "byTime":
                         # Time-based subscription: expires after expiration
                         # date
                         expired_date = info.expired_date
-                        subscribe_package_desc = f"{expired_date}后过期"
+                        subscribe_package_desc = f"Expires after {expired_date}"
                 return SubscribeStatusOutput(
                     subscribe_flag=is_subscribed,
                     subscribe_package=subscribe_package_desc,
@@ -287,26 +270,10 @@ class AlipaySubscribePackageInitialize(
     Usage scenarios:
     - AI Agent subscription payment scenario
 
-    ---
-    支付宝订阅开通组件
-
-    功能：
-    - 返回订阅套餐的购买链接
-    - 订阅计划的定价配置信息
-
-    主要特点：
-    - 智能体订阅开通
-
-    输入参数类型: SubscribePackageInitializeInput
-    输出参数类型: SubscribePackageInitializeOutput
-
-    使用场景：
-    智能体订阅付费场景
-
     """
 
     name: str = "initialize-alipay-subscription-order"
-    description: str = "用户发起订阅付费，返回订阅链接"
+    description: str = "Initialize subscription payment and return subscription link"
 
     async def _arun(
         self,
@@ -379,25 +346,10 @@ class AlipaySubscribeTimesSave(
     Usage scenarios:
     - Count-based subscription scenario
 
-    ---
-    支付宝订阅计次组件
-
-    功能：
-    - 针对按次付费的计费模式，记录会员用户消耗的使用次数。
-
-    主要特点：
-    - 智能体订阅计次
-
-    输入参数类型: SubscribeTimesSaveInput
-    输出参数类型: SubscribeTimesSaveOutput
-
-    使用场景：
-    智能体订阅计次场景
-
     """
 
     name: str = "times-alipay-subscription-consume"
-    description: str = "用户使用服务后，记录用户使用消耗的次数"
+    description: str = "Record usage count after the user consumes the service"
 
     async def _arun(
         self,
@@ -472,25 +424,10 @@ class AlipaySubscribeCheckOrInitialize(
     Usage scenarios:
     - Count-based subscription validation or initialization
 
-    ---
-    支付宝订阅检查或初始化组件
-
-    功能：
-    - 针对按次付费的计费模式，进行订阅状态检查或初始化。
-
-    主要特点：
-    - 提供校验用户状态能力，如果已订阅直接返回状态，如果未订阅返回相关链接
-
-    输入参数类型: SubscribeCheckOrInitializeInput
-    输出参数类型: SubscribeCheckOrInitializeOutput
-
-    使用场景：
-    智能体订阅检查或初始化场景
-
     """
 
     name: str = "alipay_subscribe_check_or_initialize"
-    description: str = "检查用户订阅状态，如果已订阅则返回状态，如果未订阅则返回订阅链接"
+    description: str = "Check user subscription status; return status if subscribed, or subscription link if not"
 
     async def _arun(
         self,

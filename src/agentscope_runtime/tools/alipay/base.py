@@ -8,12 +8,6 @@ Alipay Payment Base Module
 This module provides unified import, configuration checking, and client
 creation for the Alipay SDK. All Alipay-related components should use the
 foundational functionality provided by this module.
-
----
-支付宝支付基础模块
-
-该模块提供支付宝SDK的统一导入、配置检查和客户端创建功能。
-所有支付宝相关的组件都应该使用此模块提供的基础功能。
 """
 
 
@@ -78,10 +72,6 @@ class AgentExtendParams(
     AI Agent Extended Parameters Class, inheriting from Alipay SDK's
     ExtendParams. Adds support for request_channel_source parameter to
     identify AI agent source.
-
-    ---
-    智能体扩展参数类，继承支付宝SDK的ExtendParams
-    添加request_channel_source参数支持，用于标识AI智能体来源
     """
 
     def __init__(self) -> None:
@@ -101,9 +91,6 @@ class AgentExtendParams(
         """
         Override parent method to add request_channel_source to the
         serialized result.
-
-        ---
-        重写父类方法，添加request_channel_source到序列化结果中
         """
         if ALIPAY_SDK_AVAILABLE:
             params = super().to_alipay_dict()
@@ -121,9 +108,6 @@ class AgentExtendParams(
         """
         Override parent static method to support deserialization of
         request_channel_source.
-
-        ---
-        重写父类静态方法，支持request_channel_source的反序列化
         """
         if not d:
             return None
@@ -153,14 +137,6 @@ def get_alipay_gateway_url() -> str:
         str: Alipay gateway URL for the corresponding environment
             - Sandbox: https://openapi-sandbox.dl.alipaydev.com/gateway.do
             - Production: https://openapi.alipay.com/gateway.do
-
-    ---
-    根据环境变量获取支付宝网关地址
-
-    Returns:
-        str: 对应环境的支付宝网关地址
-            - 沙箱环境: https://openapi-sandbox.dl.alipaydev.com/gateway.do
-            - 生产环境: https://openapi.alipay.com/gateway.do
     """
     return (
         "https://openapi-sandbox.dl.alipaydev.com/gateway.do"
@@ -181,17 +157,6 @@ def _check_config_and_sdk() -> None:
     Raises:
         ValueError: If required environment variables are not set.
         ImportError: If Alipay SDK is not installed or failed to import.
-
-    ---
-    检查支付宝配置和SDK是否可用
-
-    该函数会验证以下内容：
-    1. 检查必需的环境变量是否设置（ALIPAY_APP_ID、ALIPAY_PRIVATE_KEY、ALIPAY_PUBLIC_KEY）
-    2. 检查支付宝SDK是否成功导入
-
-    Raises:
-        ValueError: 当必需的环境变量未设置时抛出
-        ImportError: 当支付宝SDK未安装或导入失败时抛出
     """
     # Check required environment variables
     if not ALIPAY_APP_ID or not ALIPAY_PRIVATE_KEY or not ALIPAY_PUBLIC_KEY:
@@ -212,9 +177,6 @@ class AgentAlipayClient(DefaultAlipayClient):
     """
     AI Agent Alipay Client, inheriting from DefaultAlipayClient and
     overriding relevant methods.
-
-    ---
-    智能体支付宝客户端，继承DefaultAlipayClient并重写相关方法
     """
 
     def _DefaultAlipayClient__get_common_params(
@@ -230,15 +192,6 @@ class AgentAlipayClient(DefaultAlipayClient):
 
         Returns:
             dict: common_params containing AI agent identifier
-
-        ---
-        重写父类的私有方法，在common_params中添加AI智能体标识参数
-
-        Args:
-            params: 请求参数
-
-        Returns:
-            dict: 包含AI智能体标识的common_params
         """
         # Call the parent private method
         common_params = super()._DefaultAlipayClient__get_common_params(params)
@@ -254,12 +207,6 @@ class AgentAlipayClient(DefaultAlipayClient):
 
         Args:
             params: Request parameter dictionary
-
-        ---
-        重写父类的私有方法，保留我们的自定义参数
-
-        Args:
-            params: 请求参数字典
         """
         if not params:
             return params
@@ -294,22 +241,6 @@ def _create_alipay_client() -> Any:
     Raises:
         ValueError: If environment variable configuration is incorrect
         ImportError: If Alipay SDK is unavailable
-
-    ---
-    创建支付宝客户端实例
-
-    该函数会执行以下操作：
-    1. 验证配置和SDK可用性
-    2. 读取环境变量中的密钥配置
-    3. 创建支付宝客户端配置对象
-    4. 初始化并返回支付宝客户端实例
-
-    Returns:
-        Any: 配置完成的支付宝客户端实例 (DefaultAlipayClient)
-
-    Raises:
-        ValueError: 当环境变量配置错误时
-        ImportError: 当支付宝SDK不可用时
     """
     logger.info("Creating Alipay client instance...")
     logger.info(f"Current Alipay environment: {AP_CURRENT_ENV}")

@@ -46,15 +46,15 @@ class ImageGenInput(BaseModel):
     )
     prompt: str = Field(
         ...,
-        description="正向提示词，用来描述生成图像中期望包含的元素和视觉特点, 超过800自动截断",
+        description="Positive prompt describing the desired elements and visual features in the generated image; automatically truncated beyond 800 characters",
     )
     n: Optional[int] = Field(
         default=1,
-        description="生成图片的数量。取值范围为1~4张 默认1",
+        description="Number of images to generate. Range: 1-4, default 1",
     )
     watermark: Optional[bool] = Field(
         default=None,
-        description="是否添加水印，默认不设置",
+        description="Whether to add a watermark; not set by default",
     )
     ctx: Optional[Context] = Field(
         default=None,
@@ -68,11 +68,11 @@ class ImageGenOutput(BaseModel):
     Text-to-Image Output.
     """
 
-    results: list[str] = Field(title="Results", description="输出图片url 列表")
+    results: list[str] = Field(title="Results", description="List of output image URLs")
     request_id: Optional[str] = Field(
         default=None,
         title="Request ID",
-        description="请求ID",
+        description="Request ID",
     )
 
 
