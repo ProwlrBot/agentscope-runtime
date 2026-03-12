@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint:disable=too-many-branches, protected-access
 
+import re
 from typing import Any, Callable, Generic, Optional, Type, TypeVar
 
 from mcp.server.fastmcp import FastMCP
@@ -179,6 +180,11 @@ async def {func_name}({args_str}):
                 "get_mcp_dash_request_id": get_mcp_dash_request_id,
                 "TracingUtil": TracingUtil,
             }
+
+            # Validate parameter names to prevent code injection
+            for param_name in params:
+                if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', param_name):
+                    raise ValueError(f"Invalid parameter name: {param_name}")
 
             # generate code generations
             exec(code, namespace)
