@@ -48,7 +48,7 @@ Note: Preview versions may contain features or interface changes that are not fu
 If you want to use the latest development version or contribute to the project, you can install from source:
 
 ```bash
-git clone https://github.com/agentscope-ai/agentscope-runtime.git
+git clone https://github.com/ProwlrBot/agentscope-runtime.git
 
 cd agentscope-runtime
 
@@ -76,7 +76,7 @@ You should see the version number printed out.
 
 ## Installation Options Explained
 
-The core runtime (`agentscope-runtime`) includes AgentScope Framework and Sandbox dependencies. See details about all installation options at [pyproject.toml](https://github.com/agentscope-ai/agentscope-runtime/blob/main/pyproject.toml).
+The core runtime (`agentscope-runtime`) includes AgentScope Framework and Sandbox dependencies. See details about all installation options at [pyproject.toml](https://github.com/ProwlrBot/agentscope-runtime/blob/main/pyproject.toml).
 
 | **Component**     | **Package**          | **Use-Case**  | **Dependencies**                                             |
 | ----------------- | -------------------- | ------------- | ------------------------------------------------------------ |

@@ -1,12 +1,12 @@
 # Reference: Demo House
 
 ```{note}
-Visit our Demo House to explore sample projects that show how to build agent applications with AgentScope Runtime. These demos were previously hosted in this repository and now live in [agentscope-ai/agentscope-samples](https://github.com/agentscope-ai/agentscope-samples) to better highlight their integration with other AgentScope libraries.
+Visit our Demo House to explore sample projects that show how to build agent applications with AgentScope Runtime. These demos were previously hosted in this repository and now live in [ProwlrBot/agentscope-samples](https://github.com/ProwlrBot/agentscope-samples) to better highlight their integration with other AgentScope libraries.
 ```
 
 <div class="gallery-container">
     <a class="gallery-item"
-       href="https://github.com/agentscope-ai/agentscope-samples/tree/main/browser_use/browser_use_fullstack_runtime">
+       href="https://github.com/ProwlrBot/agentscope-samples/tree/main/browser_use/browser_use_fullstack_runtime">
         <div class="gallery-item-card">
             <div class="gallery-item-card-image-container">
                 <img class="gallery-item-card-img"
@@ -22,7 +22,7 @@ Visit our Demo House to explore sample projects that show how to build agent app
         </div>
     </a>
     <a class="gallery-item"
-       href="https://github.com/agentscope-ai/agentscope-samples/tree/main/conversational_agents/chatbot_fullstack_runtime">
+       href="https://github.com/ProwlrBot/agentscope-samples/tree/main/conversational_agents/chatbot_fullstack_runtime">
         <div class="gallery-item-card">
             <div class="gallery-item-card-image-container">
                 <img class="gallery-item-card-img"

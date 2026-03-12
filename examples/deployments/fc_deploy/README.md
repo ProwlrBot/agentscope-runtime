@@ -535,7 +535,7 @@ After successful deployment:
 ## Additional Resources
 
 - **FC Console**: [https://fcnext.console.aliyun.com/](https://fcnext.console.aliyun.com/)
-- **AgentScope Runtime**: [https://github.com/agentscope-ai/agentscope-runtime](https://github.com/agentscope-ai/agentscope-runtime)
+- **AgentScope Runtime**: [https://github.com/ProwlrBot/agentscope-runtime](https://github.com/ProwlrBot/agentscope-runtime)
 - **DashScope API**: [https://dashscope.aliyun.com/](https://dashscope.aliyun.com/)
 
 This example provides a complete workflow for deploying AgentScope Runtime agents to Alibaba Cloud Function Compute with serverless, production-ready configurations.

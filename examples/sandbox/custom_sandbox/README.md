@@ -7,7 +7,7 @@ While the built-in sandbox types cover common use cases, you may encounter scena
 To create custom sandboxes, you need to install AgentScope Runtime from source in editable mode, which allows you to modify the code and see changes immediately:
 
 ```bash
-git clone https://github.com/agentscope-ai/agentscope-runtime.git
+git clone https://github.com/ProwlrBot/agentscope-runtime.git
 cd agentscope-runtime
 git submodule update --init --recursive
 pip install -e .

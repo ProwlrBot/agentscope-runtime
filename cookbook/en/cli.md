@@ -1197,7 +1197,7 @@ environment:
 
 ## Next Steps
 
-- See [examples/](https://github.com/agentscope-ai/agentscope-runtime/tree/main/examples) for complete agent implementations
+- See [examples/](https://github.com/ProwlrBot/agentscope-runtime/tree/main/examples) for complete agent implementations
 - Check [API documentation](https://runtime.agentscope.io/en/api/index.html) for programmatic usage
 - Join community on Discord/DingTalk for support
 

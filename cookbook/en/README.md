@@ -17,7 +17,7 @@ Before you begin, ensure you have the following installed:
 Clone the repository and install the necessary development dependencies:
 
 ```bash
-git clone https://github.com/agentscope-ai/agentscope-runtime.git
+git clone https://github.com/ProwlrBot/agentscope-runtime.git
 cd agentscope-runtime
 pip install -e ".[dev]"
 ```
